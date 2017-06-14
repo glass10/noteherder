@@ -35,3 +35,7 @@ i.fa-trash-o {
   i.fa-trash-o:hover {
     color: #999; }
 
+.Main {
+  display: flex;
+  height: 100vh;
+  align-items: stretch; }
