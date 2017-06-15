@@ -12,6 +12,7 @@ class NoteForm extends Component{
             body: ''
         }
         self = this;
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     static update(ev){
@@ -36,15 +37,25 @@ class NoteForm extends Component{
         this.setState(state);
     }
 
+    handleEdit(ev){
+        // ev.currentTarget.value = 'lol u thought';
+        const name = ev.target.name;
+        if(name === "title")
+            this.setState({title: ev.target.value});
+        else
+            this.setState({body: ev.target.value});
+        ev.preventDefault();
+    }
+
     render(){
         return(
             <div className="NoteForm">
                 <form>
                 <p>
-                    <input type="text" name="title" placeholder="Title your note" value={this.state.title}/>
+                    <input onChange={this.handleEdit} ref="title" type="text" name="title" placeholder="Title your note" value={this.state.title}/>
                 </p>
                 <p>
-                    <textarea name="body" cols="30" rows="10" placeholder="Just start typing..." value={this.state.body}>
+                    <textarea onChange={this.handleEdit} name="body" cols="30" rows="10" placeholder="Just start typing..." value={this.state.body}>
                     </textarea>
                 </p>
                 </form>
