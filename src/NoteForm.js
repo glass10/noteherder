@@ -4,6 +4,8 @@ import NoteList from './NoteList'
 
 // let currentNote = NoteList.test();
 let self = this;
+let noteIndex = 0;
+
 class NoteForm extends Component{
     constructor(){
         super();
@@ -15,7 +17,7 @@ class NoteForm extends Component{
         this.handleEdit = this.handleEdit.bind(this);
     }
 
-    static update(ev){
+    static updateForm(ev){
         const id = ev.currentTarget.id;
         const currentNotes = NoteList.getNotes();
         let title = '';
@@ -24,6 +26,7 @@ class NoteForm extends Component{
             if(currentNotes[i].body === id){
                 title = currentNotes[i].title;
                 body = currentNotes[i].body;
+                noteIndex = i;
                 break;
             }
         }
@@ -39,10 +42,15 @@ class NoteForm extends Component{
 
     handleEdit(ev){
         const name = ev.target.name;
-        if(name === "title")
+        if(name === "title"){
             this.setState({title: ev.target.value});
-        else
+            NoteList.setNoteTitle(noteIndex, ev.target.value);
+        }
+        else{
             this.setState({body: ev.target.value});
+            NoteList.setNoteBody(noteIndex, ev.target.value);
+        }
+        
     }
 
     render(){
