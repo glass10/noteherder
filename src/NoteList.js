@@ -15,6 +15,8 @@ const testNotes = [
         body: "Cambrian explosion radio telescope, circumnavigated citizens of distant epochs brain is the seed of intelligence two ghostly white figures in coveralls and helmets are soflty dancing galaxies inconspicuous motes of rock and gas"
     }
 ]
+let self = this;
+
 class NoteList extends Component{
     constructor(){
         super();
@@ -22,36 +24,50 @@ class NoteList extends Component{
             currentNote: '',
             notes: testNotes
         }
+        this.deleteNote = this.deleteNote.bind(this);
+        self = this;
     }
 
-    deleteNote(id){
-        console.log("This is working!");
-        console.log(id);
+    deleteNote(ev){
+        for(var i = 0; i < testNotes.length; i++) {
+            if(testNotes[i].title === ev.currentTarget.id) 
+                testNotes.splice(i,1);
+
+                const state = {...this.state};
+                state.notes = testNotes;
+                this.setState(state);
+        }
     }
+    updateState(){
+        console.log("lol");
+    }
+
     render(){
         return(
             <div className="NoteList">
                 <h3>Notes</h3>
+                {this.loopThrough}
                 <ul id="notes">
-                    {this.state.notes.map((note, i) => <NoteItem note={note} key = {i}/>)}
+                    {testNotes.map((note, i) => <NoteItem note={note} key = {i}/>, () => this.updateState())}
                 </ul>
         </div>
         )
     }
 }
-
 function NoteItem(props){
-    return(
-        <li>
-            <button className="button" id={props.note.title}><i className="fa fa-trash fa-2x" aria-hidden="true" onClick={this.deleteNote.bind(this)}></i></button>
-            <div className="note">
-                <div className="note-title">{props.note.title}</div>
-                <div className="note-body"><p>{props.note.body}</p></div>
-            </div>
-        </li>
-    )
-}
-
-NoteList noteList = new NoteList();
+        return(
+            <li>
+                <button className="button" 
+                    id={props.note.title}
+                    onClick={self.deleteNote}>
+                        <i className="fa fa-trash fa-2x" aria-hidden="true"></i>
+                    </button>
+                <div className="note">
+                    <div className="note-title">{props.note.title}</div>
+                    <div className="note-body"><p>{props.note.body}</p></div>
+                </div>
+            </li>
+        )
+    }
 
 export default NoteList;
