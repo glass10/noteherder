@@ -20,6 +20,22 @@
   margin: 20px 2rem;
 }
 
+.button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    float: right;
+    margin-top: 5px;
+}
+
+.button:hover{
+    color: white !important;
+    transition: all 0.30s ease-in-out;
+}
+
 ul#notes {
   border-top: 1px solid #eee;
   overflow-y: scroll;
