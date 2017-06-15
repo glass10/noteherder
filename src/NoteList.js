@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './NoteList.css'
+import NoteForm from './NoteForm'
 
 const testNotes = [
     {
@@ -27,7 +28,9 @@ class NoteList extends Component{
         this.deleteNote = this.deleteNote.bind(this);
         self = this;
     }
-
+    static getNotes(){
+        return testNotes;
+    }
     deleteNote(ev){
         for(var i = 0; i < testNotes.length; i++) {
             if(testNotes[i].title === ev.currentTarget.id) 
@@ -38,9 +41,6 @@ class NoteList extends Component{
                 this.setState(state);
         }
     }
-    updateState(){
-        console.log("lol");
-    }
 
     render(){
         return(
@@ -48,7 +48,7 @@ class NoteList extends Component{
                 <h3>Notes</h3>
                 {this.loopThrough}
                 <ul id="notes">
-                    {testNotes.map((note, i) => <NoteItem note={note} key = {i}/>, () => this.updateState())}
+                    {testNotes.map((note, i) => <NoteItem note={note} key = {i}/>)}
                 </ul>
         </div>
         )
@@ -56,7 +56,7 @@ class NoteList extends Component{
 }
 function NoteItem(props){
         return(
-            <li>
+            <li id={props.note.body} onClick={NoteForm.update}>
                 <button className="button" 
                     id={props.note.title}
                     onClick={self.deleteNote}>
