@@ -38,13 +38,11 @@ class NoteForm extends Component{
     }
 
     handleEdit(ev){
-        // ev.currentTarget.value = 'lol u thought';
         const name = ev.target.name;
         if(name === "title")
             this.setState({title: ev.target.value});
         else
             this.setState({body: ev.target.value});
-        ev.preventDefault();
     }
 
     render(){

@@ -26,20 +26,31 @@ class NoteList extends Component{
             notes: testNotes
         }
         this.deleteNote = this.deleteNote.bind(this);
+        this.updateNotes = this.updateNotes.bind(this);
         self = this;
     }
     static getNotes(){
         return testNotes;
     }
+    static addNote(){
+        const note = {title: 'Title your note', body:'Just start typing...'};
+        testNotes.unshift(note);
+        self.updateNotes();
+    }
+
+
     deleteNote(ev){
         for(var i = 0; i < testNotes.length; i++) {
             if(testNotes[i].title === ev.currentTarget.id) 
                 testNotes.splice(i,1);
-
-                const state = {...this.state};
-                state.notes = testNotes;
-                this.setState(state);
+                this.updateNotes();
         }
+    }
+
+    updateNotes(){
+        const state = {...this.state};
+        state.notes = testNotes;
+        this.setState(state);
     }
 
     render(){
