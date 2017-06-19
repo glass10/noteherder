@@ -4,7 +4,7 @@ import NoteForm from './NoteForm'
 
 
 
-const testNotes = JSON.parse(localStorage.getItem("notes"));
+const noteData = JSON.parse(localStorage.getItem("notes"));
 
 
 let self = this;
@@ -14,42 +14,42 @@ class NoteList extends Component{
         super();
         this.state = {
             currentNote: '',
-            notes: testNotes
+            notes: noteData
         }
         this.deleteNote = this.deleteNote.bind(this);
         this.updateNotes = this.updateNotes.bind(this);
         self = this;
     }
     static getNotes(){
-        return testNotes;
+        return noteData;
     }
     static addNote(){
         const note = {title: 'Title your note', body:'Just start typing...'};
-        testNotes.unshift(note);
+        noteData.unshift(note);
         self.updateNotes();
     }
     static setNoteTitle(i, title){
-        testNotes[i].title = title;
+        noteData[i].title = title;
         self.updateNotes();
     }
     static setNoteBody(i, body){
-        testNotes[i].body = body;
+        noteData[i].body = body;
         self.updateNotes();
     }
 
 
     deleteNote(ev){
-        for(var i = 0; i < testNotes.length; i++) {
-            if(testNotes[i].title === ev.currentTarget.id) 
-                testNotes.splice(i,1);
+        for(var i = 0; i < noteData.length; i++) {
+            if(noteData[i].title === ev.currentTarget.id) 
+                noteData.splice(i,1);
                 this.updateNotes();
         }
     }
 
     updateNotes(){
-        localStorage.setItem("notes", JSON.stringify(testNotes));
+        localStorage.setItem("notes", JSON.stringify(noteData));
         const state = {...this.state};
-        state.notes = testNotes;
+        state.notes = noteData;
         this.setState(state);
     }
 
@@ -59,7 +59,7 @@ class NoteList extends Component{
                 {this.updateNotes}
                 <h3>Notes</h3>
                 <ul id="notes">
-                    {testNotes.map((note, i) => <NoteItem note={note} key = {i}/>)}
+                    {noteData.map((note, i) => <NoteItem note={note} key = {i}/>)}
                 </ul>
         </div>
         )
