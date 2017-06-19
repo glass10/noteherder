@@ -11,6 +11,13 @@ class NoteForm extends Component {
     }
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    const newId = nextProps.currentNoteId
+    if (newId !== this.state.note.id) {
+      this.setState({ note: nextProps.notes[newId] })
+    }
+  }
+
   blankNote = () => {
     return {
       id: null,
@@ -31,6 +38,10 @@ class NoteForm extends Component {
   handleSubmit = (ev) => {
     ev.preventDefault()
     this.setState({ note: this.blankNote() })
+  }
+
+  handleRemove = (ev) => {
+    this.props.removeNote(this.state.note)
   }
 
   render() {
@@ -56,6 +67,9 @@ class NoteForm extends Component {
           </p>
           <button type="submit">
             Save and new
+          </button>
+          <button onClick={this.handleRemove}>
+            <i className="fa fa-trash-o"></i>
           </button>
         </form>
       </div>

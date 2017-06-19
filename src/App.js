@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       notes: {},
       uid: null,
+      currentNoteId: null,
     }
   }
 
@@ -31,7 +32,7 @@ class App extends Component {
   }
 
   syncNotes = () => {
-    base.syncState(
+    this.ref = base.syncState(
       `${this.state.uid}/notes`,
       {
         context: this,
@@ -43,9 +44,16 @@ class App extends Component {
   saveNote = (note) => {
     if (!note.id) {
       note.id = `note-${Date.now()}`
+      this.setCurrentNoteId(note.id)
     }
     const notes = {...this.state.notes}
     notes[note.id] = note
+    this.setState({ notes })
+  }
+
+  removeNote = (note) => {
+    const notes = {...this.state.notes}
+    notes[note.id] = null
     this.setState({ notes })
   }
 
@@ -61,14 +69,39 @@ class App extends Component {
   }
 
   signOut = () => {
-    auth.signOut()
+    auth
+      .signOut()
+      .then(
+        () => {
+          // stop syncing with Firebase
+          base.removeBinding(this.ref)
+          this.setState({ notes: {} })
+        }
+      )
+  }
+
+  setCurrentNoteId = (noteId) => {
+    this.setState({ currentNoteId: noteId })
   }
 
   renderMain = () => {
+    const actions = {
+      saveNote: this.saveNote,
+      removeNote: this.removeNote,
+      setCurrentNoteId: this.setCurrentNoteId,
+    }
+    const noteData = {
+      notes: this.state.notes,
+      currentNoteId: this.state.currentNoteId,
+    }
+
     return (
       <div>
         <SignOut signOut={this.signOut} />
-        <Main notes={this.state.notes} saveNote={this.saveNote} />
+        <Main
+          {...noteData}
+          {...actions}
+        />
       </div>
     )
   }
