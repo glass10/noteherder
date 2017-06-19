@@ -1,73 +1,66 @@
 import React, { Component } from 'react'
+
 import './NoteForm.css'
-import NoteList from './NoteList'
 
-// let currentNote = NoteList.test();
-let self = this;
-let noteIndex = 0;
+class NoteForm extends Component {
+  constructor(props) {
+    super(props)
 
-class NoteForm extends Component{
-    constructor(){
-        super();
-        this.state = {
-            title: '',
-            body: ''
-        }
-        self = this;
-        this.handleEdit = this.handleEdit.bind(this);
+    this.state = {
+      note: this.blankNote(),
     }
+  }
 
-    static updateForm(ev){
-        const id = ev.currentTarget.id;
-        const currentNotes = NoteList.getNotes();
-        let title = '';
-        let body = '';
-        for(var i = 0; i < currentNotes.length; i++){
-            if(currentNotes[i].body === id){
-                title = currentNotes[i].title;
-                body = currentNotes[i].body;
-                noteIndex = i;
-                break;
-            }
-        }
-        self.updateState(title, body);
+  blankNote = () => {
+    return {
+      id: null,
+      title: '',
+      body: '',
     }
+  }
 
-    updateState(title, body){
-        const state = {...this.state};
-        state.title = title;
-        state.body = body;
-        this.setState(state);
-    }
+  handleChanges = (ev) => {
+    const note = {...this.state.note}
+    note[ev.target.name] = ev.target.value
+    this.setState(
+      { note },
+      () => this.props.saveNote(this.state.note)
+    )
+  }
 
-    handleEdit(ev){
-        const name = ev.target.name;
-        if(name === "title"){
-            this.setState({title: ev.target.value});
-            NoteList.setNoteTitle(noteIndex, ev.target.value);
-        }
-        else{
-            this.setState({body: ev.target.value});
-            NoteList.setNoteBody(noteIndex, ev.target.value);
-        }
-        
-    }
+  handleSubmit = (ev) => {
+    ev.preventDefault()
+    this.setState({ note: this.blankNote() })
+  }
 
-    render(){
-        return(
-            <div className="NoteForm">
-                <form>
-                <p>
-                    <input onChange={this.handleEdit} ref="title" type="text" name="title" placeholder="Title your note" value={this.state.title}/>
-                </p>
-                <p>
-                    <textarea onChange={this.handleEdit} name="body" cols="30" rows="10" placeholder="Just start typing..." value={this.state.body}>
-                    </textarea>
-                </p>
-                </form>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="NoteForm">
+        <form onSubmit={this.handleSubmit}>
+          <p>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title your note"
+              onChange={this.handleChanges}
+              value={this.state.note.title}
+            />
+          </p>
+          <p>
+            <textarea
+              name="body"
+              placeholder="Just start typing..."
+              onChange={this.handleChanges}
+              value={this.state.note.body}
+            ></textarea>
+          </p>
+          <button type="submit">
+            Save and new
+          </button>
+        </form>
+      </div>
+    )
+  }
 }
 
-export default NoteForm;
+export default NoteForm

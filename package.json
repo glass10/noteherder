@@ -1,5 +1,6 @@
 {
   "name": "noteherder",
+  "homepage": "http://glass10.github.io/noteherder",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
