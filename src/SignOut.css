@@ -1,0 +1,19 @@
+.SignOut{
+    background-color: #f3f3f3;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    padding: 0.5rem 0; 
+    width: 61px;
+    font-family: "Fauna One";
+
+    color: gray;
+
+}
+
+.SignOut:hover{
+    background-color: lightgray;
+    color: red;
+    transition: 0.3s ease-in-out;
+}
