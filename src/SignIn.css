@@ -11,5 +11,22 @@
   transition: background 0.2s;
   font-family: 'helvetica neue', sans-serif;
   font-size: 20px;
-  font-weight: 200;
+  font-weight: 400;
+}
+
+.SignIn.Google{
+  background-color: #d34836 !important;
+  width: 25%;
+  color: #f1f1f1 !important;
+}
+
+.SignIn.GitHub{
+  background-color: lightgray;
+  color: black;
+  width: 25%;
+}
+
+img{
+  width: 40px;
+  margin: auto;
 }
