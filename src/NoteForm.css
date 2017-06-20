@@ -39,3 +39,8 @@ textarea {
   height: calc(100vh - 140px);
   font-size: 1.3em;
 }
+
+.fa-trash-o:hover{
+  color: black !important;
+  transition: 0.3s ease-in-out;
+}
