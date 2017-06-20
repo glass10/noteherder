@@ -4,8 +4,9 @@ import newHover from './new-hover.png'
 import newIcon from './new.png'
 import './Sidebar.css'
 import NoteForm from './NoteForm'
+import SignOut from './SignOut'
 
-const Sidebar = () =>{
+const Sidebar = ({signOut}) =>{
     return(
         <nav className="Sidebar">
         <div className="logo">
@@ -15,6 +16,7 @@ const Sidebar = () =>{
           <img src={newHover} alt="New note" />
           <img className="outline" src={newIcon} alt="New note" />
         </button>
+        <SignOut signOut={signOut} />
       </nav>
     )
 }
