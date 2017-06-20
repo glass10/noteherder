@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import './NoteForm.css'
+let self;
 
 class NoteForm extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class NoteForm extends Component {
     this.state = {
       note: this.blankNote(),
     }
+    self= this;
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -24,6 +26,10 @@ class NoteForm extends Component {
       title: '',
       body: '',
     }
+  }
+
+  static addButton(ev){
+    self.handleSubmit(ev);
   }
 
   handleChanges = (ev) => {
@@ -65,9 +71,6 @@ class NoteForm extends Component {
               value={this.state.note.body}
             ></textarea>
           </p>
-          <button type="submit">
-            Save and new
-          </button>
           <button onClick={this.handleRemove}>
             <i className="fa fa-trash-o"></i>
           </button>

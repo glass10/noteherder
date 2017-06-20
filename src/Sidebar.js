@@ -3,7 +3,7 @@ import quill from './quill.svg'
 import newHover from './new-hover.png'
 import newIcon from './new.png'
 import './Sidebar.css'
-import NoteList from './NoteList'
+import NoteForm from './NoteForm'
 
 const Sidebar = () =>{
     return(
@@ -11,7 +11,7 @@ const Sidebar = () =>{
         <div className="logo">
           <img src={quill} alt="Noteherder" />
         </div>
-        <button className="new-note" onClick={NoteList.addNote}>
+        <button className="new-note" onClick={NoteForm.addButton}>
           <img src={newHover} alt="New note" />
           <img className="outline" src={newIcon} alt="New note" />
         </button>
