@@ -1,4 +1,5 @@
 import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 
 import './Main.css'
 import Sidebar from './Sidebar'
@@ -13,7 +14,11 @@ const Main = (props) => {
         notes={props.notes}
         setCurrentNoteId={props.setCurrentNoteId}
       />
-      <NoteForm {...props} />
+
+      <Switch>
+        <Route path="/notes/:id" render={(navProps) => <NoteForm {...props} {...navProps} /> }/>
+        <Route path="/notes" render={(navProps) => <NoteForm {...props} {...navProps} /> }/>
+      </Switch>
     </div>
   )
 }
