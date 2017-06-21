@@ -9,15 +9,22 @@ import NoteForm from './NoteForm'
 const Main = (props) => {
   return (
     <div className="Main">
-      <Sidebar signOut={props.signOut}/>
+      <Sidebar
+        resetCurrentNote={props.resetCurrentNote}
+        signOut={props.signOut}
+      />
       <NoteList
         notes={props.notes}
-        setCurrentNoteId={props.setCurrentNoteId}
+        setCurrentNote={props.setCurrentNote}
       />
 
       <Switch>
-        <Route path="/notes/:id" render={(navProps) => <NoteForm {...props} {...navProps} /> }/>
-        <Route path="/notes" render={(navProps) => <NoteForm {...props} {...navProps} /> }/>
+        <Route path="/notes/:id" render={(navProps) => (
+          <NoteForm {...props} {...navProps} />
+        )} />
+        <Route path="/notes" render={(navProps) => (
+          <NoteForm {...props} {...navProps} />
+        )} />
       </Switch>
     </div>
   )
