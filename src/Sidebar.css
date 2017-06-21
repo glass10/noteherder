@@ -15,6 +15,11 @@
   padding-left: 4px;
 }
 
+.Sidebar a.new-note{
+  position: relative;
+  width: 60%;
+}
+
 .Sidebar button {
   background-color: transparent;
   border: 0;
