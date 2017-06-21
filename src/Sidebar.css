@@ -15,7 +15,8 @@
   padding-left: 4px;
 }
 
-.Sidebar a.new-note{
+.Sidebar a.new-note {
+  margin-top: 2rem;
   position: relative;
   width: 60%;
 }
@@ -25,9 +26,7 @@
   border: 0;
   color: #008BF8;
   cursor: pointer;
-  margin-top: 2rem;
-  position: relative;
-  width: 60%; }
+  }
   .Sidebar button img {
     position: absolute;
     left: 0;
@@ -35,9 +34,3 @@
     transition: opacity 0.25s ease-in-out; }
     .Sidebar button:hover img.outline {
       opacity: 0; }
-
-.NoteList {
-  border-left: 1px solid #eee;
-  border-right: 1px solid #eee;
-  width: 30rem;
-}
