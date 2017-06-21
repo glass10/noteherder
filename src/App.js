@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import './App.css'
 import Main from './Main'
@@ -83,7 +84,8 @@ class App extends Component {
     this.setState({ currentNoteId: noteId })
   }
 
-  renderMain = () => {
+
+  render() {
     const actions = {
       saveNote: this.saveNote,
       removeNote: this.removeNote,
@@ -94,21 +96,19 @@ class App extends Component {
       notes: this.state.notes,
       currentNoteId: this.state.currentNoteId,
     }
-
-    return (
-      <div>
-        <Main
-          {...noteData}
-          {...actions}
-        />
-      </div>
-    )
-  }
-
-  render() {
     return (
       <div className="App">
-        { this.signedIn() ? this.renderMain() : <SignIn /> }
+        <Switch>
+          <Route path="/notes" render={() => (
+            <Main
+              {...noteData}
+              {...actions}
+            />
+          )} />
+          <Route path="/sign-in" component={SignIn} />
+          <Route render={() => <Redirect to="/notes" />} />
+        </Switch>
+        {/*{ this.signedIn() ? this.renderMain() : <SignIn /> }*/}
       </div>
     )
   }
