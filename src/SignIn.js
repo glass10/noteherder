@@ -16,14 +16,14 @@ const SignIn = () => {
                 className="SignIn GitHub"
                 onClick={() => authenticate(githubProvider)}
               >
-              <img alt="" src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png"></img>
+              <img alt="" id="githubLogo" src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png"></img>
                 Sign In With GitHub
               </button>
             <button
                 className="SignIn Google"
                 onClick={() => authenticate(googleProvider)}
               >
-              <img alt="" src="http://diaryofasocialgal.com/wp-content/uploads/2016/10/google-plus-icon.png"></img>
+              <img alt="" id="googleLogo" src="http://diaryofasocialgal.com/wp-content/uploads/2016/10/google-plus-icon.png"></img>
               Sign In With Google
               </button>
       </section>

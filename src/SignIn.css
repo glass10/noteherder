@@ -28,22 +28,11 @@
   margin-bottom: 25px;
 }
 
-img{
+#googleLogo, #githubLogo{
   width: 40px;
-  margin: auto;
+  margin-right: 10px;
 }
 
-
-
-
-body {
-	background-color: #DCDDDF;
-	color: #000;
-	font: 14px Arial;
-	margin: 0 auto;
-	padding: 0;
-	position: relative;
-}
 h1{ font-size:28px;}
 h2{ font-size:26px;}
 h3{ font-size:18px;}
