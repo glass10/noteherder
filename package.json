@@ -8,10 +8,15 @@
     "gh-pages": "^1.0.0",
     "re-base": "^3.0.2",
     "react": "^15.6.1",
+    "react-ckeditor-component": "^1.0.3",
     "react-dom": "^15.6.1",
+    "react-froala-wysiwyg": "^2.6.1",
     "react-quill": "^1.0.0-rc.3",
     "react-router-dom": "^4.1.1",
-    "react-rte": "^0.11.0"
+    "react-rte": "^0.11.0",
+    "react-simple-markdown-editor": "^1.1.0",
+    "react-tinymce": "^0.5.1",
+    "webpack": "^3.0.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"

@@ -5,6 +5,12 @@ import './quill.snow.css'
 
 //const ReactQuill = require('react-quill');
 class NoteForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { text: this.props.currentNote.body }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
   componentWillReceiveProps(nextProps) {
     const newId = nextProps.match.params.id
 
@@ -13,6 +19,7 @@ class NoteForm extends Component {
         const note = nextProps.notes[newId]
         if (note) {
           this.props.setCurrentNote(note)
+          this.setState({ text: note.body })
         } else if (Object.keys(nextProps.notes).length > 0) {
           this.props.history.push('/notes')
         }
@@ -28,12 +35,20 @@ class NoteForm extends Component {
     this.props.saveNote(note)
   }
 
-  handleChange = (value) =>{
-    console.log(value);
+  // handleChange = (value) =>{
+  //   console.log(value);
+  //   const note = {...this.props.currentNote}
+  //   note["body"] =  value;
+  //   this.props.saveNote(note);
+  //   self.forceUpdate();
+  // }
+
+  handleChange(value) {
+    this.setState({ text: value })
+
     const note = {...this.props.currentNote}
-    note["body"] =  value;
-    this.props.saveNote(note);
-    this.forceUpdate();
+    note["body"] = value;
+    this.props.saveNote(note)
   }
 
   handleRemove = (ev) => {
@@ -56,7 +71,7 @@ class NoteForm extends Component {
           <ReactQuill 
               id="body"
               //placeholder="Just start typing..."
-              defaultValue={this.props.currentNote.body}
+              value={this.state.text}
               onChange={this.handleChange}
               ref = "BodyInput"
           />
