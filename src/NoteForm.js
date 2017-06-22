@@ -7,7 +7,7 @@ import './quill.snow.css'
 class NoteForm extends Component {
   constructor(props) {
     super(props)
-    this.state = { text: this.props.currentNote.body }
+    this.state = { text: ''}
 
     this.handleChange = this.handleChange.bind(this);
   }
@@ -34,14 +34,6 @@ class NoteForm extends Component {
     note[ev.target.name] = ev.target.value
     this.props.saveNote(note)
   }
-
-  // handleChange = (value) =>{
-  //   console.log(value);
-  //   const note = {...this.props.currentNote}
-  //   note["body"] =  value;
-  //   this.props.saveNote(note);
-  //   self.forceUpdate();
-  // }
 
   handleChange(value) {
     this.setState({ text: value })

@@ -10,9 +10,10 @@ const Note = ({ note }) => {
             {note.title}
           </div>
           <div className="note-body">
-            <p>
-              {note.body}
-            </p>
+            <p dangerouslySetInnerHTML={{__html: note.body}} />
+            {/*<p>
+              {note.body}  
+            </p>*/}
           </div>
         </div>
       </li>
