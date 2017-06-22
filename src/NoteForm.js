@@ -1,26 +1,24 @@
 import React, { Component } from 'react'
-import RichTextEditor from 'react-rte';
-import PropTypes from 'prop-types'; // ES6
-
+import ReactQuill from 'react-quill'
 import './NoteForm.css'
+import './quill.snow.css'
 
+//const ReactQuill = require('react-quill');
 class NoteForm extends Component {
-  static propTypes = {
-    onChange: PropTypes.func
-  };
-
-  state = {
-    value: RichTextEditor.createValueFromString(this.props.currentNote.body, 'html')
-  }
-
   componentWillReceiveProps(nextProps) {
     const newId = nextProps.match.params.id
 
-    if (newId !== this.props.currentNote.id) {
-      const note = nextProps.notes[newId]
-      if (note) {
-        this.props.setCurrentNote(note)
+    if (newId) {
+      if (newId !== this.props.currentNote.id) {
+        const note = nextProps.notes[newId]
+        if (note) {
+          this.props.setCurrentNote(note)
+        } else if (Object.keys(nextProps.notes).length > 0) {
+          this.props.history.push('/notes')
+        }
       }
+    } else if (this.props.currentNote.id) {
+      this.props.resetCurrentNote()
     }
   }
 
@@ -30,22 +28,18 @@ class NoteForm extends Component {
     this.props.saveNote(note)
   }
 
+  handleChange = (value) =>{
+    console.log(value);
+    const note = {...this.props.currentNote}
+    note["body"] =  value;
+    this.props.saveNote(note);
+    this.forceUpdate();
+  }
+
   handleRemove = (ev) => {
     this.props.removeNote(this.props.currentNote)
   }
-
-  onChange = (value) => {
-    this.setState({value});
-    if (this.props.onChange) {
-      // Send the changes up to the parent component as an HTML string.
-      // This is here to demonstrate using `.toString()` but in a real app it
-      // would be better to avoid generating a string on each change.
-      this.props.onChange(
-        value.toString('html')
-      );
-    }
-  };
-
+  
   render() {
     return (
       <div className="NoteForm">
@@ -59,21 +53,13 @@ class NoteForm extends Component {
               value={this.props.currentNote.title}
             />
           </p>
-          <p>
-            <textarea
-              name="body"
-              placeholder="Just start typing..."
-              onChange={this.handleChanges}
-              value={this.props.currentNote.body}
-            ></textarea>
-          </p>
-          <div>
-          {/*<Editor editorState={this.props.currentNote.body} onChange={this.handleChanges} />*/}
-          <RichTextEditor
-            value={RichTextEditor.createValueFromString(this.props.currentNote.body, 'html')}
-            onChange={this.onChange}
+          <ReactQuill 
+              id="body"
+              //placeholder="Just start typing..."
+              defaultValue={this.props.currentNote.body}
+              onChange={this.handleChange}
+              ref = "BodyInput"
           />
-          </div>
           <button
            type="button"
            onClick={this.handleRemove}
