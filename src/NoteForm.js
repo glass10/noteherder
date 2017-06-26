@@ -18,7 +18,9 @@ class NoteForm extends Component {
       if (newId !== this.props.currentNote.id) {
         const note = nextProps.notes[newId]
         if (note) {
+          console.log(note);
           this.props.setCurrentNote(note)
+          console.log(note);
           this.setState({ text: note.body })
         } else if (Object.keys(nextProps.notes).length > 0) {
           this.props.history.push('/notes')

@@ -8,18 +8,16 @@
     "gh-pages": "^1.0.0",
     "re-base": "^3.0.2",
     "react": "^15.6.1",
-    "react-ckeditor-component": "^1.0.3",
     "react-dom": "^15.6.1",
-    "react-froala-wysiwyg": "^2.6.1",
-    "react-quill": "^1.0.0-rc.3",
+    "react-quill": "^1.0.0-rc-1",
     "react-router-dom": "^4.1.1",
-    "react-rte": "^0.11.0",
-    "react-simple-markdown-editor": "^1.1.0",
-    "react-tinymce": "^0.5.1",
-    "webpack": "^3.0.0"
+    "webpack-dev-server": "2.1.0-beta.12"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "extract-text-webpack-plugin": "^2.1.2",
+    "react-scripts": "1.0.7",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^2.6.1"
   },
   "scripts": {
     "start": "react-scripts start",

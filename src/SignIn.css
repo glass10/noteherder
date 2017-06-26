@@ -1,5 +1,5 @@
 .SignIn {
-  background-color: #008BF8;
+  /*background-color: #008BF8;*/
   border: 0;
   border-radius: 5px;
   color: white;
@@ -15,6 +15,23 @@
 }
 img{
 	width: 30px;
+}
+
+body{
+	height: 100%;
+	width: 100%;
+}
+.signBody{
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.spacer{
+	width: 100px;
 }
 
 .SignIn.Google{
@@ -59,7 +76,7 @@ form:after {
 	clear: both;
 	visibility: hidden;
 }
-.container { margin: 25px auto; position: relative; width: 900px; }
+.container { margin: 8% auto; position: relative; width: 900px; }
 #content {
 	background: #f9f9f9;
 	background: -moz-linear-gradient(to bottom,  rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);
